@@ -13,7 +13,7 @@ class ObjectiveQuestions(db.Model):
     answer = db.Column(db.Text,nullable=False)
     marks = db.Column(db.Integer,nullable=False)
     teacher_id = db.Column(db.Integer,db.ForeignKey('teacher.teacher_id'),nullable=False)
-    quiz_test_id = db.Column(db.Integer,db.ForeignKey('quiztest.test_id'),nullable=False)
+    quiz_test_id = db.Column(db.Integer,db.ForeignKey('quizset.test_id'),nullable=False)
     objective_type_id = db.Column(db.Integer,db.ForeignKey('objective_type.objective_type_id'),nullable=False)
     teachers = db.relationship('Teacher',backref=db.backref('objective_questions', lazy=True))
     quizset = db.relationship('Quizset',backref=db.backref('objective_questions', lazy=True))
