@@ -1,9 +1,11 @@
 from .. import db
 
 class SubjectiveQuestions(db.Model):
-    __tablename__ = 'subjective_questions'
-    """[Create Subjective Questions Table]
+    """[summary]  
+    Args:
+        db ([type]): [description]
     """
+    __tablename__ = 'subjective_questions'
     question_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     question = db.Column(db.Text, nullable=False)
     answer = db.Column(db.Text,nullable=False)

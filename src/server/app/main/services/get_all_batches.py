@@ -5,7 +5,11 @@ import json
 
 
 def get_all_batches():
+    """[summary]    
     
+    Returns:
+        [type]: [description]
+    """
     all_batch = db.session.query(Batch).all()
     db.session.commit()
     items = list()

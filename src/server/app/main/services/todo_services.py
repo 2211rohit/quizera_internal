@@ -4,6 +4,14 @@ from flask import jsonify
 
 
 def add_new_todo(data):
+    """[summary]
+    
+    Args:
+        data ([type]): [description]
+    
+    Returns:
+        [type]: [description]
+    """
     todo = Todo(
         todo_item=data['todo']
     )

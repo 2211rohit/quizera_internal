@@ -4,6 +4,14 @@ from flask import jsonify
 
 
 def add_new_section(data):
+    """[summary]
+       
+    Args:
+        data ([type]): [description]
+    
+    Returns:
+        [type]: [description]
+    """
     section = Section(
         section_name = data['section_name'],
         batch_id = data['batch_id']

@@ -1,9 +1,11 @@
 from .. import db
 
 class ObjectiveQuestions(db.Model):
-    __tablename__ = 'objective_questions'
-    """[Create Objective Questions Table]
+    """[summary]    
+    Args:
+        db ([type]): [description]
     """
+    __tablename__ = 'objective_questions'
     question_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     question = db.Column(db.Text, nullable=False)
     option_1 = db.Column(db.Text,nullable=True)

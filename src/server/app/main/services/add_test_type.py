@@ -4,6 +4,14 @@ from flask import jsonify
 
 
 def add_new_test_type(data):
+    """[summary]
+      
+    Args:
+        data ([type]): [description]
+    
+    Returns:
+        [type]: [description]
+    """
     test_type = TestType(
         test_type_name = data['test_type_name']
     )

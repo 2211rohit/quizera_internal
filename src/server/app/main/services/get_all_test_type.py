@@ -4,7 +4,11 @@ from flask import jsonify
 
 
 def get_all_test_types():
-    
+    """[summary]
+        
+    Returns:
+        [type]: [description]
+    """
     test_type = TestType.query.all()
     db.session.commit()
     response_object = jsonify(test_type)

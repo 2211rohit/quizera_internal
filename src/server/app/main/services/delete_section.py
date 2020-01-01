@@ -4,6 +4,14 @@ from flask import jsonify
 
 
 def delete_section(data):
+    """[summary]  
+     
+    Args:
+        data ([type]): [description]
+    
+    Returns:
+        [type]: [description]
+    """
     section = Section.query.get(int(data["section_id"]))
     db.session.delete(section)
     db.session.commit()

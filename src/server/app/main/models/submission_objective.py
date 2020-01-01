@@ -2,9 +2,11 @@ from .. import db
 import datetime
 
 class SubmissionObjective(db.Model):
-    __tablename__ = 'submission_objective'
-    """[Create Submission Objective Table]
+    """[summary]
+    Args:
+        db ([type]): [description]
     """
+    __tablename__ = 'submission_objective'
     submission_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     student_id = db.Column(db.Integer,db.ForeignKey('student.student_id'),nullable=False)    
     question_id = db.Column(db.Integer,db.ForeignKey('objective_questions.question_id'),nullable=False)

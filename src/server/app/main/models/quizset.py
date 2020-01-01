@@ -1,15 +1,17 @@
 from .. import db
 
 class Quizset(db.Model):
-    __tablename__ = 'quizset'
-    """[Create Quizset Table]
+    """[summary]    
+    Args:
+        db ([type]): [description]
     """
+    __tablename__ = 'quizset'
     test_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     test_name = db.Column(db.String(250), unique=True, nullable=False)
     teacher_id = db.Column(db.Integer,db.ForeignKey('teacher.teacher_id'),nullable=False)
     time_full_test = db.Column(db.String(250), nullable=False)
     test_type_id = db.Column(db.Integer, db.ForeignKey('test_type.type_id'),nullable=False)
-    student_section_id = db.Column(db.Integer,db.ForeignKey('section.section_id'),nullable=False)
+    student_section_id = db.Column(db.Integer,db.ForeignKey('section.section_id'),default = None,nullable=True)
     student_batch_id = db.Column(db.Integer,db.ForeignKey('batch.batch_id'),nullable=False)
     flag_publish_test = db.Column(db.Boolean,default = False)
     flag_jumble_question = db.Column(db.Boolean,nullable=False)

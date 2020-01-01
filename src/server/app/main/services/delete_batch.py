@@ -4,6 +4,14 @@ from flask import jsonify
 
 
 def delete_batch(data):
+    """[summary]   
+    
+    Args:
+        data ([type]): [description]
+    
+    Returns:
+        [type]: [description]
+    """
     batch = Batch.query.get(int(data["batch_id"]))
     print(batch)
     db.session.delete(batch)
