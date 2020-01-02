@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 07a8a00735d1
+Revision ID: e5d7eed0de01
 Revises: 
-Create Date: 2019-12-30 23:28:39.091814
+Create Date: 2020-01-01 20:09:22.132948
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '07a8a00735d1'
+revision = 'e5d7eed0de01'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -35,11 +35,6 @@ def upgrade():
     sa.Column('objective_type', sa.String(length=250), nullable=False),
     sa.PrimaryKeyConstraint('objective_type_id'),
     sa.UniqueConstraint('objective_type')
-    )
-    op.create_table('student',
-    sa.Column('student_id', sa.Integer(), autoincrement=True, nullable=False),
-    sa.Column('student_name', sa.String(length=250), nullable=False),
-    sa.PrimaryKeyConstraint('student_id')
     )
     op.create_table('teacher',
     sa.Column('teacher_id', sa.Integer(), autoincrement=True, nullable=False),
@@ -71,7 +66,7 @@ def upgrade():
     sa.Column('teacher_id', sa.Integer(), nullable=False),
     sa.Column('time_full_test', sa.String(length=250), nullable=False),
     sa.Column('test_type_id', sa.Integer(), nullable=False),
-    sa.Column('student_section_id', sa.Integer(), nullable=False),
+    sa.Column('student_section_id', sa.Integer(), nullable=True),
     sa.Column('student_batch_id', sa.Integer(), nullable=False),
     sa.Column('flag_publish_test', sa.Boolean(), nullable=True),
     sa.Column('flag_jumble_question', sa.Boolean(), nullable=False),
@@ -81,6 +76,15 @@ def upgrade():
     sa.ForeignKeyConstraint(['test_type_id'], ['test_type.type_id'], ),
     sa.PrimaryKeyConstraint('test_id'),
     sa.UniqueConstraint('test_name')
+    )
+    op.create_table('student',
+    sa.Column('student_id', sa.Integer(), autoincrement=True, nullable=False),
+    sa.Column('student_name', sa.String(length=250), nullable=False),
+    sa.Column('student_batch_id', sa.Integer(), nullable=False),
+    sa.Column('student_section_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['student_batch_id'], ['batch.batch_id'], ),
+    sa.ForeignKeyConstraint(['student_section_id'], ['section.section_id'], ),
+    sa.PrimaryKeyConstraint('student_id')
     )
     op.create_table('objective_questions',
     sa.Column('question_id', sa.Integer(), autoincrement=True, nullable=False),
@@ -114,10 +118,10 @@ def upgrade():
     sa.Column('submission_id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('student_id', sa.Integer(), nullable=False),
     sa.Column('question_id', sa.Integer(), nullable=False),
+    sa.Column('quiz_test_id', sa.Integer(), nullable=False),
     sa.Column('response', sa.Text(), nullable=True),
     sa.Column('marks', sa.Integer(), nullable=False),
     sa.Column('submission_time', sa.DateTime(), nullable=True),
-    sa.Column('quiz_test_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['question_id'], ['objective_questions.question_id'], ),
     sa.ForeignKeyConstraint(['quiz_test_id'], ['quizset.test_id'], ),
     sa.ForeignKeyConstraint(['student_id'], ['student.student_id'], ),
@@ -145,12 +149,12 @@ def downgrade():
     op.drop_table('submission_objective')
     op.drop_table('subjective_questions')
     op.drop_table('objective_questions')
+    op.drop_table('student')
     op.drop_table('quizset')
     op.drop_table('section')
     op.drop_table('todo')
     op.drop_table('test_type')
     op.drop_table('teacher')
-    op.drop_table('student')
     op.drop_table('objective_type')
     op.drop_table('batch')
     op.drop_table('admin')
